@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-    Message.create(params.require(:message).permit!)
+    Message.create(messages_params)
 
     redirect_to messages_path
   end
@@ -17,9 +17,20 @@ class MessagesController < ApplicationController
 
   def update
     message = Message.find(params[:id])
-    message.update!(params.require(:message).permit!)
+    message.update!(messages_params)
 
     redirect_to messages_path
+  end
+
+  def destroy
+    message = Message.find(params[:id])
+    message.delete
+    redirect_to messages_path
+  end
+
+  private
+  def messages_params
+    params.require(:message).permit(:author, :content)
   end
 
 end

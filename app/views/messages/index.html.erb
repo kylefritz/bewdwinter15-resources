@@ -8,6 +8,8 @@
       <strong><%= message.author %></strong>
 
       <%= link_to "Edit", edit_message_path(message) %>
+
+      <%= button_to "Delete", message_path(message), method: :delete %>
     </li>
   <% end %>
 </ul>
